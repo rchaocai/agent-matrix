@@ -1,0 +1,59 @@
+{% extends "base/layout.html" %}
+
+{% block extra_css %}
+<style>
+    .container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .container::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .title {
+        font-size: {{ config.fonts.title.size }}px !important;
+        text-align: center;
+        font-weight: 800;
+        color: #FFFFFF;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        letter-spacing: 2px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .content {
+        font-size: {{ config.fonts.body.size }}px !important;
+        font-weight: 500;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 50px;
+        border-radius: 24px;
+        backdrop-filter: blur(20px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        color: #333333;
+        position: relative;
+        z-index: 1;
+    }
+
+    .footer {
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 28px;
+        position: relative;
+        z-index: 1;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,70 @@
+agent:
+  id: traffic_boost_agent
+  name: 流量提升Agent
+  description: 智能发现热点主题，自动生成并发布高质量内容，持续优化流量表现
+  enabled: true
+  llm_provider: deepseek
+  schedule:
+    cron: 0 9,12,15,18,21 * * *
+    timezone: Asia/Shanghai
+  skill_chain:
+  - skill: collection.topic_discovery
+    config:
+      count: 3
+      force_refresh: false
+      platform: xiaohongshu
+      sources:
+      - weibo
+      - baidu
+      - toutiao
+      use_llm: true
+  - skill: generation.text
+    config:
+      max_tokens: 1000
+      output_key: article_content
+      prompt_template: hot_topic_article
+      temperature: 0.85
+      variables:
+        content_direction: '{topics[0].content_direction}'
+        heat: '{topics[0].heat}'
+        keywords: '{topics[0].keywords}'
+        predicted_heat: '{topics[0].predicted_heat}'
+        reason: '{topics[0].reason}'
+        source: '{topics[0].source_name}'
+        style: 实用干货
+        target_audience: '{topics[0].target_audience}'
+        topic: '{topics[0].topic}'
+  - skill: review.sensitive
+    config:
+      categories:
+      - politics
+      - porn
+      - violence
+      strictness: medium
+  - skill: review.quality
+    config:
+      dimensions:
+      - readability
+      - completeness
+      - attractiveness
+      - shareability
+      min_score: 70
+      platform: xiaohongshu
+  - skill: generation.render
+    config:
+      author: ''
+      max_length: 200
+      platform: xiaohongshu
+      split_long: true
+      template: minimal
+      variables: {}
+  - skill: conditional.save
+    config:
+      condition: quality_score >= 70 AND is_safe == true
+      false_action: log_and_discard
+      true_action: publish
+  - skill: publishing.draft
+    config:
+      platform: xiaohongshu
+  - skill: publishing.publish
+    config: {}

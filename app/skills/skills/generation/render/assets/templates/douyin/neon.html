@@ -1,0 +1,65 @@
+{% extends "base/layout.html" %}
+
+{% block extra_css %}
+<style>
+    .container {
+        background: linear-gradient(180deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
+        box-shadow: inset 0 0 100px rgba(255, 0, 80, 0.1);
+    }
+
+    .title {
+        font-size: {{ config.fonts.title.size }}px !important;
+        text-align: center;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        color: {{ config.colors.text }};
+        text-shadow:
+            0 0 10px {{ config.colors.primary }},
+            0 0 20px {{ config.colors.primary }},
+            0 0 40px {{ config.colors.primary }};
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        from {
+            text-shadow:
+                0 0 10px {{ config.colors.primary }},
+                0 0 20px {{ config.colors.primary }};
+        }
+        to {
+            text-shadow:
+                0 0 20px {{ config.colors.primary }},
+                0 0 30px {{ config.colors.primary }},
+                0 0 40px {{ config.colors.accent }};
+        }
+    }
+
+    .content {
+        font-size: {{ config.fonts.body.size }}px !important;
+        font-weight: 400;
+        color: {{ config.fonts.body.color }};
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .footer {
+        font-weight: 600;
+        color: {{ config.colors.accent }};
+        text-shadow: 0 0 10px {{ config.colors.accent }};
+    }
+
+    .neon-line {
+        width: 100px;
+        height: 3px;
+        background: {{ config.colors.primary }};
+        margin: 30px auto;
+        box-shadow:
+            0 0 10px {{ config.colors.primary }},
+            0 0 20px {{ config.colors.primary }};
+    }
+</style>
+{% endblock %}
+
+{% block extra_html %}
+<div class="neon-line"></div>
+{% endblock %}

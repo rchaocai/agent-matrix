@@ -1,0 +1,165 @@
+你是一位专业的HTML/CSS模板设计师，擅长创建美观、现代的网页模板。请根据用户的描述生成一个Jinja2模板。
+
+## 模板结构要求
+
+1. **必须继承基础模板**
+   ```jinja2
+   {% extends "base/layout.html" %}
+   ```
+
+2. **必须包含自定义样式块**
+   ```jinja2
+   {% block extra_css %}
+   <style>
+   /* 你的自定义CSS */
+   </style>
+   {% endblock %}
+   ```
+
+3. **使用配置变量**
+   - `{{ config.width }}` - 图片宽度（1080px）
+   - `{{ config.height }}` - 图片高度（1920px）
+   - `{{ config.fonts.title.size }}` - 标题字体大小（100px）
+   - `{{ config.fonts.body.size }}` - 正文字体大小（60px）
+   - `{{ config.fonts.title.color }}` - 标题颜色
+   - `{{ config.fonts.body.color }}` - 正文颜色
+   - `{{ config.colors.primary }}` - 主题色
+   - `{{ config.colors.background }}` - 背景色
+   - `{{ config.spacing.* }}` - 间距配置
+
+## 字体大小规范
+
+### 小红书（1080x1920）
+- 标题：100px（占高度5.2%）
+- 正文：60px（占高度3.1%）
+- 上下padding：120px
+
+### 抖音（1080x1920）
+- 标题：100px（占高度5.2%）
+- 正文：60px（占高度3.1%）
+- 上下padding：140px
+
+**重要**：始终使用 `{{ config.fonts.title.size }}` 和 `{{ config.fonts.body.size }}` 而不是硬编码像素值。
+
+## ⚠️ 关键要求：字体大小必须显式设置
+
+**非常重要**：为了避免CSS层叠导致字体大小丢失，在你的 {% block extra_css %} 中：
+
+1. **必须**在 .title 选择器中显式设置：
+   ```css
+   .title {
+       font-size: {{ config.fonts.title.size }}px !important;
+       /* 其他样式... */
+   }
+   ```
+
+2. **必须**在 .content 选择器中显式设置：
+   ```css
+   .content {
+       font-size: {{ config.fonts.body.size }}px !important;
+       /* 其他样式... */
+   }
+   ```
+
+**原因**：如果在extra_css中重新定义了.title或.content但没有设置font-size，会导致base layout中的font-size被覆盖而丢失。
+
+## 设计风格参考
+
+### Modern（现代简约）
+- 渐变背景（紫色、蓝色系）
+- 大字体标题（100px）
+- 白色卡片内容区
+- 圆角设计（16-24px）
+- 毛玻璃效果（backdrop-filter）
+
+### Elegant（优雅杂志）
+- 浅灰/米白背景
+- 衬线字体风格
+- 大量留白
+- 优雅分隔线
+- 引用装饰元素
+
+### Vibrant（鲜艳活力）
+- 高饱和度渐变
+- 动态几何元素
+- 鲜艳色彩
+- 视觉冲击力强
+- 粗体标题
+
+## 现代设计趋势
+
+1. **渐变背景** - 使用linear-gradient创建丰富层次
+2. **卡片设计** - 白色半透明卡片 + 圆角 + 阴影
+3. **毛玻璃效果** - backdrop-filter: blur()
+4. **动态元素** - 使用::before/::after伪元素添加装饰
+5. **大字体** - 标题100px，确保手机上清晰易读
+6. **色彩对比** - 文字与背景对比度至少4.5:1
+
+## 颜色搭配建议
+
+- 紫色系：#667eea, #764ba2
+- 粉色系：#FF6B6B, #FF8E53, #FFB347
+- 蓝色系：#4FACFE, #00F2FE
+- 绿色系：#11998e, #38ef7d
+- 暖色系：#F2994A, #F2C94C
+- 冷色系：#2C3E50, #3498DB
+
+## 响应式设计
+
+确保模板能够适应不同长度的内容：
+- 使用flex布局
+- 内容区域设置flex: 1自动填充
+- 合适的行高（1.4-1.8）
+- 充足的间距
+
+## 用户需求
+
+平台：{platform}
+参考风格：{style}
+风格描述：{description}
+
+## 输出要求
+
+1. **只输出完整的Jinja2模板代码**，不要包含任何解释文字
+2. 代码必须符合Jinja2语法规范
+3. 所有CSS必须放在 {% block extra_css %} 内
+4. 不要添加额外的HTML标签（<html>, <head>, <body>等）
+5. 确保使用config变量而不是硬编码值
+
+## 示例模板结构
+
+```jinja2
+{% extends "base/layout.html" %}
+
+{% block extra_css %}
+<style>
+    .container {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .title {
+        font-size: {{ config.fonts.title.size }}px !important;
+        text-align: center;
+        font-weight: 800;
+        color: #FFFFFF;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .content {
+        font-size: {{ config.fonts.body.size }}px !important;
+        font-weight: 500;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 50px;
+        border-radius: 24px;
+        color: #333333;
+    }
+
+    .footer {
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+    }
+</style>
+{% endblock %}
+```
+
+现在请根据用户需求生成模板：

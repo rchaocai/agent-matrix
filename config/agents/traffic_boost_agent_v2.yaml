@@ -1,0 +1,148 @@
+# 流量提升Agent配置示例
+# 使用OpenRouter免费模型进行主题分析
+
+agent:
+  id: traffic_boost_agent_v2
+  name: 流量提升Agent v2
+  description: 使用免费LLM模型智能发现热点主题，自动生成并发布高质量内容
+  enabled: true
+  llm_provider: openrouter  # 使用OpenRouter免费模型
+  schedule:
+    cron: '0 9,12,15,18,21 * * *'  # 每天5次，覆盖黄金时段
+    timezone: Asia/Shanghai
+  
+  # LLM配置
+  llm_config:
+    provider: openrouter
+    model: qwen/qwen3-next-80b-a3b-instruct:free  # 免费的Qwen3 Next 80B模型
+    temperature: 0.7
+    max_tokens: 2000
+  
+  # 技能链配置
+  skill_chain:
+    # 第一步：采集RSS数据
+    - skill: collection.rss
+      config:
+        script: fetch_rss.py
+        url: https://www.36kr.com/feed
+        max_items: 10
+        min_length: 100
+      output_key: rss_data
+    
+    # 第二步：使用LLM分析数据，推荐主题
+    - skill: processing.analyze_topic
+      config:
+        llm_provider: openrouter
+        model: qwen/qwen3-next-80b-a3b-instruct:free
+        input_data: rss_data
+        count: 3
+        target_audience: 职场新人
+        platform: xiaohongshu
+      output_key: selected_topics
+    
+    # 第三步：生成内容（使用第一个推荐主题）
+    - skill: generation.text
+      config:
+        prompt_template: hot_topic_article
+        max_tokens: 1000
+        temperature: 0.85
+        variables:
+          topic: "{selected_topics.topics[0].topic}"
+          style: "实用干货"
+          target_audience: "职场新人"
+          keywords: "{selected_topics.topics[0].keywords}"
+      output_key: article_content
+    
+    # 第四步：内容质量审核
+    - skill: review.quality
+      config:
+        min_score: 0.7
+        dimensions:
+          - readability
+          - completeness
+          - attractiveness
+      output_key: quality_check
+    
+    # 第五步：敏感词检测
+    - skill: review.sensitive
+      config:
+        sensitive_words_file: config/sensitive_words.txt
+        action: warn  # warn或block
+      output_key: sensitive_check
+    
+    # 第六步：条件保存
+    - skill: conditional.save
+      config:
+        condition: "quality_check.score >= 0.7 and not sensitive_check.has_sensitive"
+        on_success:
+          skill: publishing.draft
+          config:
+            platform: xiaohongshu
+            save_images: true
+        on_failure:
+          action: skip
+          reason: "内容质量不达标或包含敏感词"
+      output_key: save_result
+
+# 提示词模板配置（需要在数据库中创建）
+prompt_templates:
+  - id: hot_topic_article
+    name: 热点主题文章
+    category: 内容生成
+    template_content: |
+      你是一位专业的内容创作者，擅长创作吸引人的小红书图文内容。
+      
+      请基于以下信息创作一篇高质量的文章：
+      
+      ## 主题
+      {topic}
+      
+      ## 风格
+      {style}
+      
+      ## 目标受众
+      {target_audience}
+      
+      ## 关键词
+      {keywords}
+      
+      ## 创作要求
+      1. 标题要吸引人，使用数字、疑问句或感叹句
+      2. 正文300-500字，分段清晰
+      3. 开头要抓住读者注意力
+      4. 内容实用，提供可操作的建议
+      5. 结尾引导互动（点赞、收藏、评论）
+      6. 适当使用emoji增加可读性
+      
+      ## 输出格式
+      标题：[吸引人的标题]
+      
+      正文：
+      [分段清晰的内容]
+      
+      标签：[3-5个相关标签]
+    
+    example_output: |
+      标题：职场新人必看！这5个潜规则让你少走弯路
+      
+      正文：
+      刚入职场的你，是不是经常感到迷茫？今天分享5条职场潜规则，帮你快速适应职场生活！
+      
+      1️⃣ 永远不要在背后说同事坏话
+      职场没有秘密，你说的每一句话都可能传到当事人耳朵里。
+      
+      2️⃣ 学会向上管理
+      主动汇报工作进度，让领导知道你在做什么，这比默默努力更重要。
+      
+      3️⃣ 不要把同事当朋友
+      保持专业距离，工作关系和个人关系要分清楚。
+      
+      4️⃣ 邮件要简洁明了
+      领导没时间看长篇大论，重要信息放在第一段。
+      
+      5️⃣ 学会说"不"
+      不是所有事情都要答应，合理拒绝才能专注重要工作。
+      
+      💡 记住：职场如战场，掌握这些潜规则，让你的职场之路更顺畅！
+      
+      标签：#职场新人 #职场潜规则 #职场生存法则 #职场技巧 #新人必看

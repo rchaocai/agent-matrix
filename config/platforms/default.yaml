@@ -1,0 +1,37 @@
+# 默认平台配置
+width: 1080
+height: 1920
+max_length: 500
+dpi: 150
+
+# 字体配置
+fonts:
+  title:
+    family: Source Han Serif CN, serif
+    size: 48
+    weight: bold
+    color: "#333333"
+    line_height: 1.4
+  body:
+    family: Source Han Serif CN, serif
+    size: 32
+    weight: normal
+    color: "#666666"
+    line_height: 1.6
+
+# 颜色方案
+colors:
+  background: "#FFFFFF"
+  primary: "#007AFF"
+  secondary: "#888888"
+  text: "#333333"
+  accent: "#FFCC00"
+
+# 间距配置
+spacing:
+  padding_top: 120
+  padding_bottom: 120
+  padding_left: 80
+  padding_right: 80
+  content_margin_bottom: 60
+  footer_margin_top: 80

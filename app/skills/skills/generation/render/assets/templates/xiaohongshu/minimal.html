@@ -1,0 +1,27 @@
+{% extends "base/layout.html" %}
+
+{% block extra_css %}
+<style>
+    .container {
+        background: linear-gradient(135deg, {{ config.colors.background }} 0%, #F0F0F0 100%);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .title {
+        font-size: {{ config.fonts.title.size }}px !important;
+        border-bottom: 3px solid {{ config.colors.primary }};
+        padding-bottom: 30px;
+    }
+
+    .content {
+        font-size: {{ config.fonts.body.size }}px !important;
+        font-weight: 500;
+    }
+
+    .footer {
+        font-weight: 600;
+        color: {{ config.colors.primary }};
+    }
+</style>
+{% endblock %}

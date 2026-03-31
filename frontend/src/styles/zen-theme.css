@@ -1,0 +1,335 @@
+/* 觉知矩阵 - 禅意极简主题配置 */
+
+/* ===== 全局变量 ===== */
+
+/* 禅意极简主题（默认） */
+:root,
+[data-theme="zen"] {
+  /* 配色方案 */
+  --color-bg-primary: #faf7f2;          /* 米白，像宣纸 */
+  --color-bg-card: #ffffff;            /* 纯白卡片背景 */
+  --color-bg-secondary: #e8e0d5;      /* 浅米灰，卡片背景、分割线 */
+  --color-text-primary: #2c2c2c;       /* 深灰，主文字 */
+  --color-text-secondary: #666666;     /* 次要文字 */
+  --color-text-placeholder: #999999;   /* 占位文字 */
+  --color-accent: #a88f6e;              /* 淡茶色，强调色 */
+  --color-accent-hover: #968060;       /* 淡茶色hover */
+  --color-accent-light: #f5efe7;       /* 超淡茶色背景 */
+  --color-border: #e8e0d5;             /* 边框色 */
+  --color-divider: #e8e0d5;            /* 分割线 */
+
+  /* 状态色 */
+  --color-success: #67c23a;            /* 成功 */
+  --color-warning: #e6a23c;            /* 警告 */
+  --color-danger: #f56c6c;             /* 危险 */
+  --color-info: #409eff;               /* 信息 */
+
+  /* 圆角 */
+  --border-radius-small: 8px;
+  --border-radius-base: 12px;
+  --border-radius-large: 16px;
+
+  /* 阴影 */
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.06);
+  --shadow-floating: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* 间距 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* 字体 */
+  --font-family-title: 'STKaiti', 'KaiTi', 'Source Han Serif SC', serif;
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* 明亮主题 */
+[data-theme="light"] {
+  --color-bg-primary: #ffffff;
+  --color-bg-card: #f8f9fa;
+  --color-bg-secondary: #f1f3f5;
+  --color-text-primary: #212529;
+  --color-text-secondary: #6c757d;
+  --color-text-placeholder: #adb5bd;
+  --color-accent: #228be6;
+  --color-accent-hover: #1c7ed6;
+  --color-accent-light: #e7f5ff;
+  --color-border: #dee2e6;
+  --color-divider: #dee2e6;
+
+  --color-success: #40c057;
+  --color-warning: #fd7e14;
+  --color-danger: #fa5252;
+  --color-info: #228be6;
+
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-floating: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+  --font-family-title: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* 暗色主题 */
+[data-theme="dark"] {
+  --color-bg-primary: #1a1a1a;
+  --color-bg-card: #242424;
+  --color-bg-secondary: #2d2d2d;
+  --color-text-primary: #e9ecef;
+  --color-text-secondary: #adb5bd;
+  --color-text-placeholder: #6c757d;
+  --color-accent: #74c0fc;
+  --color-accent-hover: #4dabf7;
+  --color-accent-light: #1e3a5f;
+  --color-border: #373737;
+  --color-divider: #373737;
+
+  --color-success: #51cf66;
+  --color-warning: #ffd43b;
+  --color-danger: #ff6b6b;
+  --color-info: #74c0fc;
+
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-floating: 0 8px 20px rgba(0, 0, 0, 0.5);
+
+  --font-family-title: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ===== 全局样式重置 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-base);
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ===== 通用组件样式 ===== */
+
+/* 卡片 */
+.zen-card {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-base);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  padding: var(--spacing-lg);
+  transition: all 0.3s ease;
+}
+
+.zen-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* 按钮 */
+.zen-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: var(--border-radius-base);
+  border: 1px solid var(--color-border);
+  background: white;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.zen-btn:hover {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.zen-btn.primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+}
+
+.zen-btn.primary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+.zen-btn.text {
+  border-color: transparent;
+  background: transparent;
+}
+
+/* 输入框 */
+.zen-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-base);
+  background: white;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.zen-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(168, 143, 110, 0.1);
+}
+
+/* 标签 */
+.zen-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: var(--border-radius-small);
+  border: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.zen-tag.success {
+  background: #f0f9ff;
+  color: var(--color-success);
+  border-color: #b3e19d;
+}
+
+.zen-tag.warning {
+  background: #fef0f0;
+  color: var(--color-danger);
+  border-color: #fbc4c4;
+}
+
+.zen-tag.info {
+  background: #f4f4f5;
+  color: var(--color-text-secondary);
+  border-color: #d3d4d6;
+}
+
+/* 分割线 */
+.zen-divider {
+  height: 1px;
+  background: var(--color-divider);
+  border: none;
+  margin: var(--spacing-md) 0;
+}
+
+/* 状态指示器 */
+.zen-status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.zen-status-dot.online {
+  background: var(--color-success);
+}
+
+.zen-status-dot.offline {
+  background: var(--color-text-placeholder);
+}
+
+.zen-status-dot.warning {
+  background: var(--color-warning);
+}
+
+/* 文字样式 */
+.zen-title {
+  font-family: var(--font-family-title);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.zen-subtitle {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* 空状态 */
+.zen-empty {
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  color: var(--color-text-placeholder);
+}
+
+.zen-empty-icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-md);
+  opacity: 0.5;
+}
+
+/* Loading状态 */
+.zen-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-placeholder);
+}
+
+/* Element Plus 覆盖样式 */
+.el-button {
+  border-radius: var(--border-radius-base) !important;
+}
+
+.el-input__wrapper {
+  border-radius: var(--border-radius-base) !important;
+}
+
+.el-card {
+  border-radius: var(--border-radius-base) !important;
+  box-shadow: var(--shadow-card) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+/* 工具类 */
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.bg-accent-light {
+  background: var(--color-accent-light);
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.zen-fade-in {
+  animation: fadeIn 0.3s ease;
+}

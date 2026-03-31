@@ -1,0 +1,85 @@
+{% extends "base/layout.html" %}
+
+{% block extra_css %}
+<style>
+    .container {
+        background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFB347 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .container::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    .container::after {
+        content: '';
+        position: absolute;
+        bottom: -150px;
+        left: -150px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+        border-radius: 50%;
+    }
+
+    .title {
+        font-size: {{ config.fonts.title.size }}px !important;
+        text-align: center;
+        font-weight: 900;
+        color: #FFFFFF;
+        text-shadow:
+            0 4px 0 #FF6B6B,
+            0 8px 20px rgba(0, 0, 0, 0.4);
+        letter-spacing: 1px;
+        position: relative;
+        z-index: 1;
+        transform: rotate(-2deg);
+    }
+
+    .content {
+        font-size: {{ config.fonts.body.size }}px !important;
+        font-weight: 600;
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 45px;
+        border-radius: 30px;
+        box-shadow:
+            0 15px 50px rgba(0, 0, 0, 0.3),
+            inset 0 -5px 20px rgba(255, 107, 107, 0.2);
+        color: #2C2C2C;
+        position: relative;
+        z-index: 1;
+        transform: rotate(1deg);
+        border: 4px solid #FFFFFF;
+    }
+
+    .content::before {
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 30px;
+        background: linear-gradient(to right, #FF6B6B, #FFB347);
+        border-radius: 15px;
+        opacity: 0.8;
+    }
+
+    .footer {
+        font-weight: 800;
+        color: #FFFFFF;
+        font-size: 30px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 1;
+    }
+</style>
+{% endblock %}

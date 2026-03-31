@@ -1,0 +1,276 @@
+# 小红书平台配置
+width: 1080
+height: 1920
+max_length: 500
+dpi: 150
+
+# 字体配置
+fonts:
+  title:
+    family: Source Han Serif CN, serif
+    size: 100
+    weight: bold
+    color: "#333333"
+    line_height: 1.4
+  body:
+    family: Source Han Serif CN, serif
+    size: 60
+    weight: normal
+    color: "#666666"
+    line_height: 1.6
+
+# 颜色方案
+colors:
+  background: "#FAFAFA"
+  primary: "#FF2442"
+  secondary: "#888888"
+  text: "#333333"
+  accent: "#FFB800"
+
+# 间距配置
+spacing:
+  padding_top: 120
+  padding_bottom: 120
+  padding_left: 80
+  padding_right: 80
+  padding_x: 80
+  padding_y: 120
+  padding_horizontal: 80
+  padding_vertical: 120
+  title_margin_bottom: 60
+  content_margin_bottom: 60
+  content_padding_x: 60
+  content_padding_y: 40
+  card_padding: 40
+  footer_margin_top: 80
+
+# 模板配置
+templates:
+  zen:
+    background: solid
+    background_color: "#F5F5F0"
+    border: false
+    shadow: false
+    color_schemes:
+      - name: serenity
+        background: "#F5F5F0"
+        primary: "#FF2442"
+        secondary: "#888888"
+        text: "#333333"
+        accent: "#FFB800"
+      - name: nature
+        background: "#E8F0E8"
+        primary: "#4CAF50"
+        secondary: "#6B8E23"
+        text: "#2D4A2D"
+        accent: "#8BC34A"
+    font_schemes:
+      - name: source_han_serif
+        title_font: Source Han Serif CN, serif
+        body_font: Source Han Serif CN, serif
+      - name: default
+        title_font: Songti SC, serif
+        body_font: PingFang SC, sans-serif
+      - name: modern
+        title_font: PingFang SC, sans-serif
+        body_font: PingFang SC, sans-serif
+      - name: elegant
+        title_font: Songti SC, serif
+        body_font: Songti SC, serif
+      - name: bold
+        title_font: Heiti SC, sans-serif
+        body_font: Heiti SC, sans-serif
+      - name: source_han_sans
+        title_font: Source Han Sans CN, sans-serif
+        body_font: Source Han Sans CN, sans-serif
+  minimal:
+    background: solid
+    background_color: "#FFFFFF"
+    border: false
+    shadow: true
+    color_schemes:
+      - name: default
+        background: "#FAFAFA"
+        primary: "#FF2442"
+        secondary: "#888888"
+        text: "#333333"
+        accent: "#FFB800"
+      - name: warm
+        background: "#FFF5F0"
+        primary: "#FF6B35"
+        secondary: "#8B6F47"
+        text: "#3D2B1F"
+        accent: "#FFB347"
+      - name: cool
+        background: "#F0F5FF"
+        primary: "#4A90E2"
+        secondary: "#5A6C7D"
+        text: "#1A365D"
+        accent: "#667EEA"
+    font_schemes:
+      - name: source_han_serif
+        title_font: Source Han Serif CN, serif
+        body_font: Source Han Serif CN, serif
+      - name: default
+        title_font: Songti SC, serif
+        body_font: PingFang SC, sans-serif
+      - name: modern
+        title_font: PingFang SC, sans-serif
+        body_font: PingFang SC, sans-serif
+      - name: elegant
+        title_font: Songti SC, serif
+        body_font: Songti SC, serif
+      - name: bold
+        title_font: Heiti SC, sans-serif
+        body_font: Heiti SC, sans-serif
+      - name: source_han_sans
+        title_font: Source Han Sans CN, sans-serif
+        body_font: Source Han Sans CN, sans-serif
+  gradient:
+    background: gradient
+    gradient_colors: ["#FFE5E5", "#FFD0D0"]
+    border: false
+    color_schemes:
+      - name: pink
+        background: "#FFE5E5"
+        primary: "#FF2442"
+        secondary: "#FF69B4"
+        text: "#333333"
+        accent: "#FFB800"
+      - name: sunset
+        background: "linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFB347 100%)"
+        primary: "#FF6B35"
+        secondary: "#FF8E53"
+        text: "#FFFFFF"
+        accent: "#FFD700"
+    font_schemes:
+      - name: source_han_serif
+        title_font: Source Han Serif CN, serif
+        body_font: Source Han Serif CN, serif
+      - name: default
+        title_font: Songti SC, serif
+        body_font: PingFang SC, sans-serif
+      - name: modern
+        title_font: PingFang SC, sans-serif
+        body_font: PingFang SC, sans-serif
+      - name: elegant
+        title_font: Songti SC, serif
+        body_font: Songti SC, serif
+      - name: bold
+        title_font: Heiti SC, sans-serif
+        body_font: Heiti SC, sans-serif
+      - name: source_han_sans
+        title_font: Source Han Sans CN, sans-serif
+        body_font: Source Han Sans CN, sans-serif
+  modern:
+    background: gradient
+    gradient_colors: ["#667eea", "#764ba2"]
+    border: false
+    color_schemes:
+      - name: purple
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+        primary: "#FFFFFF"
+        secondary: "#E0E0E0"
+        text: "#FFFFFF"
+        accent: "#FFB800"
+      - name: blue
+        background: "linear-gradient(135deg, #4FACFE 0%, #00F2FE 100%)"
+        primary: "#FFFFFF"
+        secondary: "#E0E0E0"
+        text: "#FFFFFF"
+        accent: "#FFD700"
+    font_schemes:
+      - name: source_han_serif
+        title_font: Source Han Serif CN, serif
+        body_font: Source Han Serif CN, serif
+      - name: default
+        title_font: PingFang SC, sans-serif
+        body_font: PingFang SC, sans-serif
+      - name: elegant
+        title_font: Songti SC, serif
+        body_font: Songti SC, serif
+      - name: bold
+        title_font: Heiti SC, sans-serif
+        body_font: Heiti SC, sans-serif
+      - name: source_han_sans
+        title_font: Source Han Sans CN, sans-serif
+        body_font: Source Han Sans CN, sans-serif
+  elegant:
+    background: solid
+    background_color: "#F5F5F0"
+    border: false
+    shadow: false
+    color_schemes:
+      - name: cream
+        background: "#F5F5F0"
+        primary: "#8B7355"
+        secondary: "#A0896C"
+        text: "#3D2B1F"
+        accent: "#C4A574"
+      - name: rose
+        background: "#FFF0F5"
+        primary: "#D4A5A5"
+        secondary: "#E8B4B8"
+        text: "#4A2C2C"
+        accent: "#E6B8B8"
+      - name: sage
+        background: "#F0F5F0"
+        primary: "#7B8E7B"
+        secondary: "#9AAA9A"
+        text: "#2D3A2D"
+        accent: "#B8C9B8"
+    font_schemes:
+      - name: source_han_serif
+        title_font: Source Han Serif CN, serif
+        body_font: Source Han Serif CN, serif
+      - name: default
+        title_font: Songti SC, serif
+        body_font: Songti SC, serif
+      - name: modern
+        title_font: PingFang SC, sans-serif
+        body_font: PingFang SC, sans-serif
+      - name: bold
+        title_font: Heiti SC, sans-serif
+        body_font: Heiti SC, sans-serif
+      - name: source_han_sans
+        title_font: Source Han Sans CN, sans-serif
+        body_font: Source Han Sans CN, sans-serif
+  vibrant:
+    background: gradient
+    gradient_colors: ["#FF6B6B", "#FF8E53", "#FFB347"]
+    border: false
+    color_schemes:
+      - name: sunset
+        background: "linear-gradient(135deg, #FF6B6B 0%, #FF8E53 50%, #FFB347 100%)"
+        primary: "#FFFFFF"
+        secondary: "#FFE0B2"
+        text: "#FFFFFF"
+        accent: "#FFD700"
+      - name: tropical
+        background: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)"
+        primary: "#FFFFFF"
+        secondary: "#E0FFE0"
+        text: "#FFFFFF"
+        accent: "#FFD700"
+      - name: berry
+        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+        primary: "#FFFFFF"
+        secondary: "#E0E0FF"
+        text: "#FFFFFF"
+        accent: "#FFD700"
+    font_schemes:
+      - name: default
+        title_font: PingFang SC, sans-serif
+        body_font: PingFang SC, sans-serif
+      - name: elegant
+        title_font: Songti SC, serif
+        body_font: Songti SC, serif
+      - name: bold
+        title_font: Heiti SC, sans-serif
+        body_font: Heiti SC, sans-serif
+      - name: source_han_sans
+        title_font: Source Han Sans CN, sans-serif
+        body_font: Source Han Sans CN, sans-serif
+      - name: source_han_serif
+        title_font: Source Han Serif CN, serif
+        body_font: Source Han Serif CN, serif

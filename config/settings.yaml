@@ -1,0 +1,32 @@
+# LLM提供商配置
+llm:
+  default_provider: "qianwen"  # qianwen, deepseek, wenxin
+  providers:
+    qianwen:
+      api_key: "${QIANWEN_API_KEY:-}"
+      model: "qwen-plus"
+      base_url: "https://dashscope.aliyuncs.com/api/v1"
+    deepseek:
+      api_key: "${DEEPSEEK_API_KEY:-}"
+      model: "deepseek-chat"
+      base_url: "https://api.deepseek.com"
+    wenxin:
+      api_key: "${WENXIN_API_KEY:-}"
+      secret_key: "${WENXIN_SECRET_KEY:-}"
+      model: "ERNIE-4.0-8K"
+
+# 数据库配置
+database:
+  url: "sqlite://./data/database.db"
+  # 生产环境使用PostgreSQL:
+  # url: "postgresql://user:password@localhost/agentmatrix"
+
+# 调度器配置
+scheduler:
+  timezone: "Asia/Shanghai"
+  max_workers: 3
+
+# 日志配置
+logging:
+  level: "INFO"
+  file: "data/logs/app.log"

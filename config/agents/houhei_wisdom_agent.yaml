@@ -1,0 +1,40 @@
+agent:
+  id: houhei_wisdom_agent
+  name: 厚黑学智慧Agent
+  description: 分享人性真相、职场潜规则和高情商话术
+  enabled: true
+  llm_provider: deepseek
+  schedule:
+    cron: 0 12 * * *
+    timezone: Asia/Shanghai
+  skill_chain:
+  - skill: generation.text
+    config:
+      max_tokens: 1000
+      prompt_template: houhei_wisdom
+      temperature: 0.85
+      variables:
+        topic: 人性真相
+  - skill: review.quality
+    config:
+      dimensions:
+      - readability
+      - completeness
+      - attractiveness
+      min_score: 60
+      platform: xiaohongshu
+  - skill: generation.render
+    config:
+      author: '@厚黑学践行者'
+      max_length: 200
+      output_dir: data/images
+      platform: xiaohongshu
+      split_long: true
+      template: elegant
+      variables: {}
+  - skill: publishing.draft
+    config:
+      platform: xiaohongshu
+      save_images: true
+  - skill: publishing.publish
+    config: {}

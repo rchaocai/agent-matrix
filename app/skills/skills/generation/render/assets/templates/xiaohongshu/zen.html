@@ -1,0 +1,55 @@
+{% extends "base/layout.html" %}
+
+{% block extra_css %}
+<style>
+    .container {
+        background-color: #F5F5F0;
+        position: relative;
+    }
+
+    .container::before {
+        content: "";
+        position: absolute;
+        top: 60px;
+        right: 60px;
+        width: 80px;
+        height: 80px;
+        border: 3px solid {{ config.colors.primary }};
+        border-radius: 50%;
+        opacity: 0.1;
+    }
+
+    .title {
+        font-size: {{ config.fonts.title.size }}px !important;
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: {{ config.colors.text }};
+        position: relative;
+    }
+
+    .title::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: {{ config.colors.primary }};
+        margin: 30px auto 0;
+    }
+
+    .content {
+        font-size: {{ config.fonts.body.size }}px !important;
+        font-weight: 400;
+        text-align: center;
+        padding-top: 40px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .footer {
+        font-size: 20px;
+        font-weight: 500;
+        opacity: 0.7;
+        font-style: italic;
+    }
+</style>
+{% endblock %}

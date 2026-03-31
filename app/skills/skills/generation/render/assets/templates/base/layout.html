@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: {{ config.fonts.body.family or 'NotoSansSC' }}, sans-serif;
+            background-color: {{ config.colors.background }};
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: {{ config.width }}px;
+            height: {{ config.height }}px;
+            background-color: {{ config.colors.background }};
+            padding: {{ config.spacing.padding_top }}px {{ config.spacing.padding_right }}px {{ config.spacing.padding_bottom }}px {{ config.spacing.padding_left }}px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .title {
+            font-family: {{ config.fonts.title.family or 'SourceHanSerifSC' }}, serif;
+            font-size: {{ config.fonts.title.size }}px;
+            font-weight: {{ config.fonts.title.weight or 'bold' }};
+            color: {{ config.fonts.title.color }};
+            line-height: {{ config.fonts.title.line_height or 1.4 }};
+            margin-bottom: 60px;
+            text-align: {{ title_align or 'center' }};
+        }
+
+        .content {
+            font-family: {{ config.fonts.body.family or 'NotoSansSC' }}, sans-serif;
+            font-size: {{ config.fonts.body.size }}px;
+            font-weight: {{ config.fonts.body.weight or 'normal' }};
+            color: {{ config.fonts.body.color }};
+            line-height: {{ config.fonts.body.line_height or 1.6 }};
+            flex: 1;
+            overflow: hidden;
+            text-align: justify;
+            white-space: pre-wrap;
+        }
+
+        .footer {
+            margin-top: {{ config.spacing.footer_margin_top }}px;
+            text-align: center;
+            font-size: 24px;
+            color: {{ config.colors.secondary or '#888888' }};
+        }
+
+        {% block extra_css %}{% endblock %}
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if title %}
+        <h1 class="title">{{ title }}</h1>
+        {% endif %}
+
+        <div class="content">{{ content }}</div>
+
+        {% if author %}
+        <div class="footer">@{{ author }}</div>
+        {% endif %}
+    </div>
+
+    {% block extra_html %}{% endblock %}
+</body>
+</html>

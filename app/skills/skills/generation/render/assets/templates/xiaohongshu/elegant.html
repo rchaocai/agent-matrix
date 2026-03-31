@@ -1,0 +1,75 @@
+{% extends "base/layout.html" %}
+
+{% block extra_css %}
+<style>
+    .container {
+        background: linear-gradient(to bottom, #F5F5F0 0%, #E8E8E0 100%);
+        position: relative;
+    }
+
+    .container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(to bottom, transparent, {{ config.colors.primary }}40, transparent);
+    }
+
+    .title {
+        font-size: {{ config.fonts.title.size }}px !important;
+        text-align: center;
+        font-weight: 700;
+        color: #2C2C2C;
+        letter-spacing: 3px;
+        position: relative;
+        padding-bottom: 30px;
+    }
+
+    .title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, transparent, {{ config.colors.primary }}, transparent);
+    }
+
+    .content {
+        font-size: {{ config.fonts.body.size }}px !important;
+        font-weight: 400;
+        color: #4A4A4A;
+        line-height: 1.8;
+        text-align: justify;
+        position: relative;
+        padding: 0 40px;
+    }
+
+    .content::before {
+        content: '"';
+        position: absolute;
+        top: -20px;
+        left: 0;
+        font-size: 80px;
+        color: {{ config.colors.primary }}20;
+        font-family: Georgia, serif;
+        line-height: 1;
+    }
+
+    .footer {
+        font-weight: 400;
+        color: #888888;
+        font-size: 26px;
+        letter-spacing: 2px;
+        font-style: italic;
+    }
+
+    .footer::before {
+        content: '— ';
+    }
+</style>
+{% endblock %}

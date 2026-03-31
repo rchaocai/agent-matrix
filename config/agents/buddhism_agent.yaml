@@ -1,0 +1,67 @@
+agent:
+  id: buddhism_agent
+  name: 佛学号Agent
+  description: ''
+  enabled: false
+  llm_provider: deepseek
+  schedule:
+    cron: 0 9,12,18 * * *
+    timezone: Asia/Shanghai
+  skill_chain:
+  - skill: generation.text
+    config:
+      max_tokens: 500
+      prompt_template: '你是一位佛学传播者，请基于以下素材创作一条适合小红书的内容。
+
+
+        原始素材：
+
+        {content}
+
+
+        要求：
+
+        1. 语气平和、富有智慧
+
+        2. 引用相关佛经典故（如《金刚经》《心经》等）
+
+        3. 结合现代生活场景
+
+        4. 字数200-300字
+
+        5. 包含3-5个emoji
+
+        6. 避免敏感词汇和违规内容
+
+        '
+      temperature: 0.8
+      variables:
+        topic: 寻找智慧
+  - skill: generation.render
+    config:
+      max_length: 300
+      platform: xiaohongshu
+      split_long: true
+      template: minimal
+  - skill: review.sensitive
+    config:
+      categories:
+      - politics
+      - porn
+      - violence
+      - spam
+      strictness: medium
+  - skill: conditional.save
+    config:
+      condition: quality_score >= 70 AND is_safe == true
+      false_action: log_and_discard
+      true_action: save_as_draft
+  - skill: publishing.draft
+    config:
+      platform: xiaohongshu
+      save_metadata:
+        quality_score: '{quality_score}'
+        reviewed: true
+        sensitive_check: passed
+  - skill: publishing.publish
+    config: {}

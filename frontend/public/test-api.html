@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>渲染API测试</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .test-section {
+      margin-bottom: 24px;
+      padding: 16px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .test-section h3 {
+      margin-bottom: 12px;
+      color: #555;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #a88f6e;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: #96805e;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .result {
+      margin-top: 12px;
+      padding: 12px;
+      background: white;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .result pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .success {
+      color: #4caf50;
+      font-weight: 500;
+    }
+
+    .error {
+      color: #f44336;
+      font-weight: 500;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .image-item {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .image-item img {
+      width: 100%;
+      display: block;
+    }
+
+    .image-info {
+      padding: 8px;
+      font-size: 12px;
+      background: #f9f9f9;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 图文渲染 API 测试</h1>
+
+    <!-- 测试1：获取平台列表 -->
+    <div class="test-section">
+      <h3>测试1：获取支持的平台</h3>
+      <button onclick="testGetPlatforms()">测试</button>
+      <div class="result" id="result-platforms"></div>
+    </div>
+
+    <!-- 测试2：获取模板列表 -->
+    <div class="test-section">
+      <h3>测试2：获取支持的模板</h3>
+      <button onclick="testGetTemplates()">测试</button>
+      <div class="result" id="result-templates"></div>
+    </div>
+
+    <!-- 测试3：单篇渲染 -->
+    <div class="test-section">
+      <h3>测试3：单篇渲染</h3>
+      <button onclick="testRender()">测试</button>
+      <div class="result" id="result-render"></div>
+    </div>
+
+    <!-- 测试4：模板预览 -->
+    <div class="test-section">
+      <h3>测试4：模板预览</h3>
+      <button onclick="testPreview()">测试</button>
+      <div class="result" id="result-preview"></div>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = 'http://localhost:8000/api/render';
+
+    async function testGetPlatforms() {
+      const resultDiv = document.getElementById('result-platforms');
+      resultDiv.innerHTML = '<p>加载中...</p>';
+
+      try {
+        const response = await fetch(`${API_BASE}/platforms`);
+        const data = await response.json();
+
+        resultDiv.innerHTML = `
+          <p class="success">✓ 请求成功</p>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = `<p class="error">✗ 请求失败: ${error.message}</p>`;
+      }
+    }
+
+    async function testGetTemplates() {
+      const resultDiv = document.getElementById('result-templates');
+      resultDiv.innerHTML = '<p>加载中...</p>';
+
+      try {
+        const response = await fetch(`${API_BASE}/templates?platform=xiaohongshu`);
+        const data = await response.json();
+
+        resultDiv.innerHTML = `
+          <p class="success">✓ 请求成功</p>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = `<p class="error">✗ 请求失败: ${error.message}</p>`;
+      }
+    }
+
+    async function testRender() {
+      const resultDiv = document.getElementById('result-render');
+      resultDiv.innerHTML = '<p>渲染中，请稍候...</p>';
+
+      try {
+        const response = await fetch(`${API_BASE}/from-text`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            title: '测试标题',
+            content: '这是一段测试内容，用于验证渲染API是否正常工作。禅修的核心智慧在于觉知当下。',
+            platform: 'xiaohongshu',
+            template: 'minimal',
+            author: '@测试账号'
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.images && data.images.length > 0) {
+          const imagesHtml = data.images.map(img => {
+            const fullUrl = img.url.startsWith('http') ? img.url : `http://localhost:8000${img.url}`;
+            return `
+              <div class="image-item">
+                <img src="${fullUrl}" alt="渲染图片" onerror="this.parentElement.parentElement.parentElement.innerHTML='<p class=\\'error\\'>图片加载失败</p>'">
+                <div class="image-info">第 ${img.index} 页</div>
+              </div>
+            `;
+          }).join('');
+
+          resultDiv.innerHTML = `
+            <p class="success">✓ 渲染成功！共 ${data.total_pages} 页</p>
+            <div class="image-grid">${imagesHtml}</div>
+            <pre style="margin-top:12px;">${JSON.stringify(data, null, 2)}</pre>
+          `;
+        } else {
+          resultDiv.innerHTML = `
+            <p class="error">✗ 渲染成功但未生成图片</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `<p class="error">✗ 渲染失败: ${error.message}</p>`;
+      }
+    }
+
+    async function testPreview() {
+      const resultDiv = document.getElementById('result-preview');
+      resultDiv.innerHTML = '<p>生成中，请稍候...</p>';
+
+      try {
+        const response = await fetch(`${API_BASE}/preview`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            template: 'minimal',
+            platform: 'xiaohongshu',
+            sample: true
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.image_url) {
+          const fullUrl = data.image_url.startsWith('http') ? data.image_url : `http://localhost:8000${data.image_url}`;
+          resultDiv.innerHTML = `
+            <p class="success">✓ 预览生成成功</p>
+            <div class="image-item" style="max-width:300px;">
+              <img src="${fullUrl}" alt="预览图片" onerror="this.parentElement.innerHTML='<p class=\\'error\\'>图片加载失败: ${fullUrl}</p>'">
+            </div>
+            <pre style="margin-top:12px;">${JSON.stringify(data, null, 2)}</pre>
+          `;
+        } else {
+          resultDiv.innerHTML = `
+            <p class="error">✗ 预览生成失败</p>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `<p class="error">✗ 预览失败: ${error.message}</p>`;
+      }
+    }
+
+    // 页面加载时自动运行测试1和测试2
+    window.onload = () => {
+      testGetPlatforms();
+      testGetTemplates();
+    };
+  </script>
+</body>
+</html>

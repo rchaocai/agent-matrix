@@ -1,0 +1,62 @@
+agent:
+  id: xiaohongshu_content_agent
+  name: 禅意一刻Agent
+  description: 自动生成社交媒体文本内容并渲染为图文卡片
+  enabled: true
+  llm_provider: deepseek
+  schedule:
+    cron: 0 9 * * *
+    timezone: Asia/Shanghai
+  skill_chain:
+  - skill: collection.rss
+    config:
+      max_items: 5
+      url: https://www.36kr.com/feed
+      variables: {}
+  - skill: processing.analyze_topic
+    config:
+      llm_provider: deepseek
+      model: deepseek-chat
+      input_data: rss_data
+      count: 3
+      platform: xiaohongshu
+  - skill: generation.text
+    config:
+      max_tokens: 1000
+      prompt_template: zen_case_copy
+      temperature: 0.8
+  - skill: review.sensitive
+    config:
+      categories:
+      - politics
+      - porn
+      - violence
+      strictness: medium
+  - skill: review.quality
+    config:
+      dimensions:
+      - readability
+      - completeness
+      - attractiveness
+      min_score: 60
+      platform: xiaohongshu
+  - skill: generation.render
+    config:
+      author: '@佛学行者'
+      max_length: 200
+      output_dir: data/images
+      platform: xiaohongshu
+      split_long: true
+      template: zen
+      variables: {}
+  - skill: conditional.save
+    config:
+      condition: quality_score >= 60 AND is_safe == true
+      false_action: log_and_discard
+      true_action: save_as_draft
+  - skill: publishing.draft
+    config:
+      platform: xiaohongshu
+      save_images: true
+  - skill: publishing.publish
+    config: {}

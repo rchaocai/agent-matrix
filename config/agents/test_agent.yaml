@@ -1,0 +1,21 @@
+agent:
+  id: test_agent
+  name: 测试Agent
+  description: null
+  enabled: false
+  llm_provider: deepseek
+  schedule: null
+  skill_chain:
+  - skill: collection.rss
+    config:
+      script: fetch_rss.py
+      url: https://www.36kr.com/feed
+      max_items: 5
+      variables: {}
+  - skill: processing.analyze_topic
+    config:
+      llm_provider: deepseek
+      model: deepseek-chat
+      input_data: rss_data
+      count: 3
+      platform: xiaohongshu

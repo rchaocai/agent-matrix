@@ -1,0 +1,138 @@
+# 热点数据源配置
+
+# DailyHotApi 配置（推荐方案）
+dailyhot:
+  enabled: true
+  base_url: "http://localhost:6688"  # 本地部署的DailyHotApi服务
+  timeout: 10
+  retry_times: 3
+  
+  # 支持的平台
+  platforms:
+    weibo:
+      enabled: true
+      name: "微博热搜"
+      endpoint: "/weibo"
+      priority: 1  # 优先级，数字越小越优先
+      category: "综合"
+      
+    zhihu:
+      enabled: true
+      name: "知乎热榜"
+      endpoint: "/zhihu"
+      priority: 2
+      category: "知识"
+      
+    douyin:
+      enabled: true
+      name: "抖音热点"
+      endpoint: "/douyin"
+      priority: 3
+      category: "娱乐"
+      
+    bilibili:
+      enabled: true
+      name: "B站热门"
+      endpoint: "/bilibili"
+      priority: 4
+      category: "娱乐"
+      
+    toutiao:
+      enabled: true
+      name: "今日头条"
+      endpoint: "/toutiao"
+      priority: 5
+      category: "综合"
+
+# RSS 源配置（备选方案）
+rss:
+  enabled: true
+  timeout: 15
+  
+  sources:
+    # 科技类
+    tech:
+      - name: "阮一峰的网络日志"
+        url: "https://feeds.feedburner.com/ruanyifeng"
+        category: "科技"
+        priority: 1
+        
+      - name: "36氪"
+        url: "https://www.36kr.com/feed"
+        category: "科技"
+        priority: 2
+        
+      - name: "爱范儿"
+        url: "https://www.ifanr.com/feed"
+        category: "科技"
+        priority: 3
+    
+    # 职场类
+    career:
+      - name: "LinkedIn职场"
+        url: "https://www.linkedin.com/feed/zh-cn"
+        category: "职场"
+        priority: 1
+        
+      - name: "智联招聘职场资讯"
+        url: "https://www.zhaopin.com/rss"
+        category: "职场"
+        priority: 2
+    
+    # 生活类
+    lifestyle:
+      - name: "Lifehacker"
+        url: "https://www.lifehacker.com/rss"
+        category: "生活"
+        priority: 1
+        
+      - name: "知乎每日精选"
+        url: "https://www.zhihu.com/rss"
+        category: "生活"
+        priority: 2
+
+# 极速API配置（第三方API，需要申请appkey）
+jisuapi:
+  enabled: false  # 默认关闭，需要申请appkey后开启
+  base_url: "https://api.jisuapi.com"
+  appkey: "your_appkey_here"  # 请替换成你的appkey
+  timeout: 10
+  
+  apis:
+    weibo:
+      endpoint: "/hotsearch/weibo"
+      name: "微博热搜"
+      
+    baidu:
+      endpoint: "/hotsearch/baidu"
+      name: "百度热搜"
+      
+    zhihu:
+      endpoint: "/hotsearch/zhihu"
+      name: "知乎热榜"
+
+# 主题发现配置
+discovery:
+  # 热点数据缓存时间（秒）
+  cache_ttl: 3600  # 1小时
+  
+  # 主题推荐数量
+  topic_count: 5
+  
+  # 最小热度阈值（过滤低热度内容）
+  min_heat: 10000
+  
+  # 关键词过滤（排除不合适的内容）
+  exclude_keywords:
+    - "广告"
+    - "推广"
+    - "营销"
+    - "带货"
+  
+  # 分类映射（将平台分类映射到系统分类）
+  category_mapping:
+    "娱乐": ["娱乐", "明星", "影视", "音乐"]
+    "职场": ["职场", "工作", "求职", "面试"]
+    "科技": ["科技", "互联网", "数码", "AI"]
+    "生活": ["生活", "健康", "美食", "旅行"]
+    "教育": ["教育", "学习", "考试", "培训"]

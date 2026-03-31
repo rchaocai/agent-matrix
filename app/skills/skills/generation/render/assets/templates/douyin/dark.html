@@ -1,0 +1,32 @@
+{% extends "base/layout.html" %}
+
+{% block extra_css %}
+<style>
+    .container {
+        background-color: #1A1A1A;
+        box-shadow: inset 0 0 60px rgba(255, 0, 80, 0.08);
+    }
+
+    .title {
+        font-size: {{ config.fonts.title.size }}px !important;
+        text-align: center;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: {{ config.colors.text }};
+        border-bottom: 2px solid {{ config.colors.primary }};
+        padding-bottom: 30px;
+    }
+
+    .content {
+        font-size: {{ config.fonts.body.size }}px !important;
+        font-weight: 400;
+        color: {{ config.fonts.body.color }};
+    }
+
+    .footer {
+        font-weight: 600;
+        color: {{ config.colors.primary }};
+        letter-spacing: 1px;
+    }
+</style>
+{% endblock %}

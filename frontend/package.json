@@ -1,0 +1,26 @@
+{
+  "name": "zen-matrix-frontend",
+  "version": "1.0.0",
+  "description": "觉知矩阵 - AI自媒体矩阵管理系统",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.0",
+    "axios": "^1.6.0",
+    "echarts": "^5.4.0",
+    "element-plus": "^2.4.0",
+    "js-yaml": "^4.1.1",
+    "pinia": "^2.1.0",
+    "vue": "^3.4.0",
+    "vue-router": "^4.2.0",
+    "vuedraggable": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "sass": "^1.69.0",
+    "vite": "^5.0.0"
+  }
+}
