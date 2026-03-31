@@ -13,6 +13,8 @@
 
 ![主页截图](docs/screenshots/homepage.png)
 
+![Agent技能链配置](docs/screenshots/agent-skill-chain.png)
+
 ## 🌟 已实现特性
 
 ### 核心功能
