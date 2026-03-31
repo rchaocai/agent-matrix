@@ -11,8 +11,6 @@
 
 **🤖 本项目 95% 的代码由 AI 辅助完成，使用智谱 GLM-4.7 作为核心开发助手。**
 
-![主页截图](https://github.com/rchaocai/agent-matrix/raw/main/docs/screenshots/homepage.png)
-
 ## 🌟 已实现特性
 
 ### 核心功能
