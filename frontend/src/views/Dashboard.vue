@@ -269,11 +269,23 @@ onMounted(() => {
   width: 56px;
   height: 56px;
   border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   color: #fff;
   flex-shrink: 0;
+  padding: 0;
+}
+
+.stat-icon .el-icon {
+  width: 32px;
+  height: 32px;
+  display: contents;
+}
+
+.stat-icon .el-icon svg {
+  width: 32px;
+  height: 32px;
+  display: block;
 }
 
 .stat-content {

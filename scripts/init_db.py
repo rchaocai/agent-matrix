@@ -3,9 +3,14 @@
 """
 
 import asyncio
+import sys
+from pathlib import Path
+
+# 添加项目根目录到 Python 路径
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from tortoise import Tortoise
 from app.config import settings
-from pathlib import Path
 
 
 async def init_db():
